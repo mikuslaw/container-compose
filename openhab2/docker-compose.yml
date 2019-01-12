@@ -6,9 +6,9 @@ services:
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /ContainerData/openhab2/openhab/conf:/openhab/conf
-      - /ContainerData/openhab2/openhab/userdata:/openhab/userdata
-      - /ContainerData/openhab2/openhab/addons:/openhab/addons
+      - /share/ContainerData/openhab2/openhab/conf:/openhab/conf
+      - /share/ContainerData/openhab2/openhab/userdata:/openhab/userdata
+      - /share/ContainerData/openhab2/openhab/addons:/openhab/addons
     ports:
       - "8082:8080"
     environment:
