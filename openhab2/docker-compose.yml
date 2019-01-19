@@ -4,6 +4,7 @@ services:
   openhab2:
     image: openhab/openhab
     restart: always
+    network_mode: "bridge"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /share/ContainerData/openhab2/openhab/conf:/openhab/conf
@@ -16,3 +17,27 @@ services:
       OPENHAB_HTTP_PORT: "8080"
       OPENHAB_HTTPS_PORT: "8443"
       EXTRA_JAVA_OPTS: "-Duser.timezone=Europe/Warsaw"
+  influxdb:
+    image: influxdb
+    restart: always
+    network_mode: "bridge"
+    volumes:
+      - /share/ContainerData/influxdb/influxdb:/var/lib/influxdb
+      - /share/ContainerData/influxdb/influxdb.conf:/var/lib/influxdb.conf
+    ports:
+      - "8086:8086"
+    environment:
+      TZ: "Europe/Warsaw"
+  grafana:
+    image: grafana/grafana
+    restart: always
+    network_mode: "bridge"
+    volumes:
+      - /share/ContainerData/grafana/etc:/etc/grafana
+      - /share/ContainerData/grafana/lib:/var/lib/grafana
+    ports:
+      - 3000:3000
+    environment:
+      TZ: "Europe/Warsaw"
+      GF_SECURITY_ADMIN_PASSWORD: mikuslaw850818
+      GF_INSTALL_PLUGINS: grafana-clock-panel,natel-discrete-panel,ayoungprogrammer-finance-datasource
