@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  node-red:
+    image: nodered/node-red-docker
+    restart: always
+    network_mode: "bridge"
+    ports:
+      - "1880:1880"
