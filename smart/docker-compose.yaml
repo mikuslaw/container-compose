@@ -1,0 +1,22 @@
+mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    environment:
+        - TZ=Europe/Warsaw
+    volumes:
+        - /share/ContainerData/smart/mosquitto/config:/mosquitto/config
+        - /share/ContainerData/smart/mosquitto/data:/mosquitto/data
+        - /share/ContainerData/smart/mosquitto/log:/mosquitto/log
+    ports:
+        - 1883:1883
+        - 9001:9001
+
+mqttbridge:
+    image: sgupta99/mqtt-bridge-smartthings:1.0.3-alpine
+    container_name: mbs
+    environment:
+        - TZ=Europe/Warsaw
+    volumes:
+        - /share/ContainerData/smart/mqtt-bridge-smartthings:/mbs/config
+    ports:
+        - 8080:8080
